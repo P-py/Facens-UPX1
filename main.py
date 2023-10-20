@@ -19,6 +19,7 @@ except:
     print("Nao foi possível conectar ao Arduino.")
     sys.exit()
 
+#Funcao depreciada utilizada para inicialização da variável ser
 """def initializeSerial():
     try:
         ser = serial.Serial('COM4', 9600, timeout=1)
@@ -48,6 +49,12 @@ def findCars():
             ser.write(b"G1R2")
         elif (vehicle_count2>vehicle_count):
             ser.write(b"R1G2")
+        elif (vehicle_count==0):
+            ser.write(b"R1G2")
+        elif (vehicle_count2==0):
+            ser.write(b"G1R2")
+        elif (vehicle_count==0 and vehicle_count2==0):
+            ser.write(b"R1R2")
         for box in vehicle_boxes:
             x, y, w, h = box
             cv2.rectangle(source, (x, y), (x+w, y+h), (25, 0, 180), 3)

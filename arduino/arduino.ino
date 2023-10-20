@@ -45,5 +45,21 @@ void loop() {
       estado2="G";
       digitalWrite(pinoR2, LOW);
     }
+    else if ((input=="R1R2"||input=="R2R1")&&(estado1=="G"){
+      digitalWrite(pinoY1, HIGH);
+      delay(3000);
+      digitalWrite(pinoR1, HIGH);
+      estado1="R";
+      digitalWrite(pinoG1, LOW);
+      digitalWrite(pinoY1, LOW);
+    }
+    else if ((input=="R1R2"||input=="R2R1")&&(estado2=="G"){
+      digitalWrite(pinoY2, HIGH);
+      delay(3000);
+      digitalWrite(pinoR2, HIGH);
+      estado2="R";
+      digitalWrite(pinoG2, LOW);
+      digitalWrite(pinoY2, LOW);  
+    }
   }
 }
