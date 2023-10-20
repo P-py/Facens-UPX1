@@ -9,7 +9,10 @@ videoInput = cv2.VideoCapture('./sources/video.mp4')
 videoInput2 = cv2.VideoCapture('./sources/video2.mp4')
 counter = 0
 counter2 = 0
-countTime = 0
+countTimeGreen1 = 0
+countTimeRed1 = 0
+countTimeGreen2 = 0
+countTimeRed2 = 0
 
 portList = ['COM4', 'COM3', 'COM1', 'COM2']
 
@@ -55,27 +58,32 @@ def findCars():
             ser.write(b"G1R2")
             for i in range(0, 12):
                 time.sleep(1)
-                countTime += 1
+                countTimeGreen1 += 1
+                countTimeRed2 += 1
         elif (vehicle_count2>vehicle_count):
             ser.write(b"R1G2")
             for i in range(0, 12):
                 time.sleep(1)
-                countTime += 1
+                countTimeRed1 += 1
+                countTimeGreen2 += 1
         elif (vehicle_count==0):
             ser.write(b"R1G2")
             for i in range(0, 12):
                 time.sleep(1)
-                countTime += 1
+                countTimeRed1 += 1
+                countTimeGreen2 += 1
         elif (vehicle_count2==0):
             ser.write(b"G1R2")
             for i in range(0, 12):
                 time.sleep(1)
-                countTime += 1
+                countTimeGreen1 += 1
+                countTimeRed2 += 1 
         elif (vehicle_count==0 and vehicle_count2==0):
             ser.write(b"R1R2")
             for i in range(0, 12):
                 time.sleep(1)
-                countTime += 1
+                countTimeRed1 += 1
+                countTimeRed2 += 1
         for box in vehicle_boxes:
             x, y, w, h = box
             cv2.rectangle(source, (x, y), (x+w, y+h), (25, 0, 180), 3)
