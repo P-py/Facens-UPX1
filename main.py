@@ -3,6 +3,7 @@ import numpy as np
 import time
 from vehicle_detector import VehicleDetector
 import serial
+import sys
 
 videoInput = cv2.VideoCapture('./sources/video.mp4')
 videoInput2 = cv2.VideoCapture('./sources/video2.mp4')
@@ -12,7 +13,11 @@ counter2 = 0
 portList = ['COM4', 'COM3', 'COM1', 'COM2']
 
 vd = VehicleDetector()
-ser = serial.Serial('COM4', 9600, timeout=1)
+try:
+    ser = serial.Serial('COM4', 9600, timeout=1)
+except:
+    print("Nao foi possível conectar ao Arduino.")
+    sys.exit()
 
 """def initializeSerial():
     try:
