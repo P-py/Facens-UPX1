@@ -27,6 +27,7 @@ def init():
     except:
         print("Nao foi possível conectar ao Arduino.")
         sys.exit()
+    return vd, ser
 
 #Funcao depreciada utilizada para inicialização da variável ser
 """def initializeSerial():
@@ -99,4 +100,5 @@ def findCars():
             break
         time.sleep(1)
 
+vd, ser = init()
 findCars()
