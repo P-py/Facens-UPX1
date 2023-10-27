@@ -5,8 +5,8 @@ from vehicle_detector import VehicleDetector
 import serial
 import sys
 
-videoInput = cv2.VideoCapture('./sources/video.mp4')
-videoInput2 = cv2.VideoCapture('./sources/video2.mp4')
+videoInput = cv2.VideoCapture(0)
+videoInput2 = cv2.VideoCapture('./sources/video.mp4')
 counter = 0
 counter2 = 0
 countTimeGreen1 = 0
@@ -52,9 +52,9 @@ def findCars():
         print(f"Cruzamento 1: {vehicle_count}")
         print(f"Cruzamento 2: {vehicle_count2}")
         print("---")
-        #ser = initializeSerial()
-        #ser.write(f'{vehicle_count}'.encode())
-        #ser.write(f'{vehicle_count2}'.encode())
+        ser = initializeSerial()
+        ser.write(f'{vehicle_count}'.encode())
+        ser.write(f'{vehicle_count2}'.encode())
         if (vehicle_count>vehicle_count2):
             ser.write(b"G1R2")
             for i in range(0, 12):
