@@ -12,8 +12,8 @@ from urllib.request import urlopen
 import matplotlib.pyplot as plt
 
 # IF NEEDED CHANGE THE LOCAL IP ADDRESS
-URL = "http://192.168.0.4/capture"
-URL2 = "http://192.168.0.250/capture"
+URL2 = "http://192.168.0.4/capture"
+URL = "http://192.168.0.250/capture"
 
 #videoInput = cv2.VideoCapture(URL)
 #videoInput2 = cv2.VideoCapture(URL2)
@@ -74,7 +74,7 @@ def init():
         print("Nao foi possivel carregar o modulo de Deteccao.")
         sys.exit()
     try:
-        ser = serial.Serial('COM4', 9600, timeout=1)
+        ser = serial.Serial('COM5', 9600, timeout=1)
     except:
         print("Nao foi possível conectar ao Arduino.")
         sys.exit()
@@ -162,9 +162,9 @@ def findCars(countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, cou
             x, y, w, h = box
             #cv2.rectangle(source2, (x, y), (x+w, y+h), (25, 0, 180), 3)
             cv2.putText(source2, f"{vehicle_count2}", (20, 58), 0, 2, (108, 200, 0), 3)
-        cv2.imshow('Source', source)
+        #cv2.imshow('Source', source)
         #cv2.moveWindow('Source', 0,0)
-        cv2.imshow('Source 2', source2)
+        #cv2.imshow('Source 2', source2)
         if (cv2.waitKey(1) & 0xFF == ord('x')):
             return countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, countCars
 
