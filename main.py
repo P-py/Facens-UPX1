@@ -132,36 +132,37 @@ def findCars(countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, cou
                 sumTime += 1
                 countTimeRed1 = countTimeRed1 + 1
                 countTimeGreen2 = countTimeGreen2 + 1
-        elif (vehicle_count==0):
-            ser.write(b"R1G2")
-            for i in range(0, 12):
-                time.sleep(1)
-                sumTime += 1
-                countTimeRed1 = countTimeRed1 + 1
-                countTimeGreen2 = countTimeGreen2 + 1
-        elif (vehicle_count2==0):
-            ser.write(b"G1R2")
-            for i in range(0, 12):
-                time.sleep(1)
-                sumTime += 1
-                countTimeGreen1 = countTimeGreen1 + 1
-                countTimeRed2 = countTimeRed2 + 1
-        elif (vehicle_count==0 and vehicle_count2==0):
-            ser.write(b"R1R2")
-            for i in range(0, 12):
-                time.sleep(1)
-                sumTime += 1
-                countTimeRed1 = countTimeRed1 + 1
-                countTimeRed2 = countTimeRed2 + 1
+        elif ((vehicle_count==0) or (vehicle_count2==0)):
+            if ((vehicle_count==0) and (vehicle_count2==0)):
+                ser.write(b"R1R2")
+                for i in range(0, 12):
+                    time.sleep(1)
+                    sumTime += 1
+                    countTimeRed1 = countTimeRed1 + 1
+                    countTimeRed2 = countTimeRed2 + 1
+            elif (vehicle_count==0):
+                ser.write(b"R1G2")
+                for i in range(0, 12):
+                    time.sleep(1)
+                    sumTime += 1
+                    countTimeRed1 = countTimeRed1 + 1
+                    countTimeGreen2 = countTimeGreen2 + 1
+            elif (vehicle_count2==0):
+                ser.write(b"G1R2")
+                for i in range(0, 12):
+                    time.sleep(1)
+                    sumTime += 1
+                    countTimeGreen1 = countTimeGreen1 + 1
+                    countTimeRed2 = countTimeRed2 + 1
         listTime.append(sumTime)
-        for box in vehicle_boxes:
-            x, y, w, h = box
+        #for box in vehicle_boxes:
+            #x, y, w, h = box
             #cv2.rectangle(source, (x, y), (x+w, y+h), (25, 0, 180), 3)
-            cv2.putText(source, f"{vehicle_count}", (20, 58), 0, 2, (108, 200, 0), 3)
-        for box in vehicle_boxes2:
-            x, y, w, h = box
+            #cv2.putText(source, f"{vehicle_count}", (20, 58), 0, 2, (108, 200, 0), 3)
+        #for box in vehicle_boxes2:
+            #x, y, w, h = box
             #cv2.rectangle(source2, (x, y), (x+w, y+h), (25, 0, 180), 3)
-            cv2.putText(source2, f"{vehicle_count2}", (20, 58), 0, 2, (108, 200, 0), 3)
+            #cv2.putText(source2, f"{vehicle_count2}", (20, 58), 0, 2, (108, 200, 0), 3)
         #cv2.imshow('Source', source)
         #cv2.moveWindow('Source', 0,0)
         #cv2.imshow('Source 2', source2)
