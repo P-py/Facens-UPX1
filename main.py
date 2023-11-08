@@ -10,10 +10,11 @@ import sys
 import cvlib
 from urllib.request import urlopen
 import matplotlib.pyplot as plt
+import random
 
 # IF NEEDED CHANGE THE LOCAL IP ADDRESS
-URL2 = "http://192.168.0.4/capture"
-URL = "http://192.168.0.250/capture"
+URL = "http://192.168.244.163/capture"
+URL2 = "http://192.168.244.69/capture"
 
 #videoInput = cv2.VideoCapture(URL)
 #videoInput2 = cv2.VideoCapture(URL2)
@@ -118,7 +119,90 @@ def findCars(countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, cou
         #ser = initializeSerial()
         #ser.write(f'{vehicle_count}'.encode())
         #ser.write(f'{vehicle_count2}'.encode())
-        if (vehicle_count>vehicle_count2):
+        if ((vehicle_count==0) or (vehicle_count2==0)):
+            if ((vehicle_count==0) and (vehicle_count2==0)):
+                ser.write(b"R1R2")
+                for i in range(0, 12):
+                    time.sleep(1)
+                    sumTime += 1
+                    countTimeRed1 = countTimeRed1 + 1
+                    countTimeRed2 = countTimeRed2 + 1
+            else:
+                if (vehicle_count==0):
+                    ser.write(b"R1G2")
+                    for i in range(0, 12):
+                        time.sleep(1)
+                        sumTime += 1
+                        countTimeRed1 = countTimeRed1 + 1
+                        countTimeGreen2 = countTimeGreen2 + 1
+                elif (vehicle_count2==0):
+                    ser.write(b"G1R2")
+                    for i in range(0, 12):
+                        time.sleep(1)
+                        sumTime += 1
+                        countTimeGreen1 = countTimeGreen1 + 1
+                        countTimeRed2 = countTimeRed2 + 1
+        else:
+            if (vehicle_count==vehicle_count2):
+                if (count_geral1>count_geral2):
+                    ser.write(b"R1G2")
+                    for i in range(0, 12):
+                        time.sleep(1)
+                        sumTime += 1
+                        countTimeRed1 = countTimeRed1 + 1
+                        countTimeGreen2 = countTimeGreen2 + 1
+                elif (count_geral1==count_geral2):
+                    if (random.randint([1, 2])==1):
+                        ser.write(b"G1R2")
+                        for i in range(0, 12):
+                            time.sleep(1)
+                            sumTime += 1
+                            countTimeGreen1 = countTimeGreen1 + 1
+                            countTimeRed2 = countTimeRed2 + 1
+                    else:
+                        ser.write(b"R1G2")
+                        for i in range(0, 12):
+                            time.sleep(1)
+                            sumtime += 1
+                            countTimeRed1 = countTimeRed1 + 1
+                            countTimeGreen2 = countTimeGreen2 + 1
+                else:
+                    ser.write(b"G1R2")
+                    for i in range(0, 12):
+                        time.sleep(1)
+                        sumTime += 1
+                        countTimeGreen1 = countTimeGreen1 + 1
+                        countTimeRed2 = countTimeRed2 + 1
+            else:
+                if (vehicle_count>vehicle_count2):
+                    for i in range(0, 3):
+                        if counter == 2:
+                            counter = 0
+                            break
+                        else:
+                            ser.write(b"G1R2")
+                            counter += 1
+                            for i in range(0, 12):
+                                time.sleep(1)
+                                sumTime += 1
+                                countTimeGreen1 += 1
+                                countTimeRed2 += 1
+                else:
+                    for i in range(0, 3):
+                        if counter2 == 2:
+                            counter2 = 0
+                            break
+                        else:
+                            ser.write(b"R1G2")
+                            counter2 += 1
+                            for i in range(0, 12):
+                                time.sleep(1)
+                                sumTime += 1
+                                countTimeRed1 += 1
+                                countTimeGreen2 += 1
+                    
+
+        """ if (vehicle_count>vehicle_count2):
             ser.write(b"G1R2")
             for i in range(0, 12):
                 time.sleep(1)
@@ -153,7 +237,7 @@ def findCars(countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, cou
                     time.sleep(1)
                     sumTime += 1
                     countTimeGreen1 = countTimeGreen1 + 1
-                    countTimeRed2 = countTimeRed2 + 1
+                    countTimeRed2 = countTimeRed2 + 1 """
         listTime.append(sumTime)
         #for box in vehicle_boxes:
             #x, y, w, h = box
