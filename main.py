@@ -12,8 +12,8 @@ from urllib.request import urlopen
 import matplotlib.pyplot as plt
 
 # IF NEEDED CHANGE THE LOCAL IP ADDRESS
-URL = "http://192.168.244.163/capture"
-URL2 = "http://192.168.244.69/capture"
+URL2 = "http://192.168.10.69/capture"
+URL = "http://192.168.10.163/capture"
 
 #videoInput = cv2.VideoCapture(URL)
 #videoInput2 = cv2.VideoCapture(URL2)
@@ -155,7 +155,7 @@ def findCars(countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, cou
                     countTimeGreen1 = countTimeGreen1 + 1
                     countTimeRed2 = countTimeRed2 + 1
         listTime.append(sumTime)
-        for box in vehicle_boxes:
+        """ for box in vehicle_boxes:
             x, y, w, h = box
             cv2.rectangle(source, (x, y), (x+w, y+h), (25, 0, 180), 3)
             cv2.putText(source, f"{vehicle_count}", (20, 58), 0, 2, (108, 200, 0), 3)
@@ -165,7 +165,7 @@ def findCars(countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, cou
             cv2.putText(source2, f"{vehicle_count2}", (20, 58), 0, 2, (108, 200, 0), 3)
         cv2.imshow('Source', source)
         cv2.moveWindow('Source', 0,0)
-        cv2.imshow('Source 2', source2)
+        cv2.imshow('Source 2', source2) """
         if (cv2.waitKey(1) & 0xFF == ord('x')):
             return countTimeGreen1, countTimeGreen2, countTimeRed1, countTimeRed2, countCars
 
